@@ -6,10 +6,12 @@
 #include <string>
 #include <vector>
 
-#include "../common/Token.hpp"
-#include "../common/TokenType.hpp"
-#include "../frontend/scanner.hpp"
+#include "../include/Token.hpp"
+#include "../include/TokenType.hpp"
+#include "../include/scanner.hpp"
 
+
+namespace cpplox {
 
 class Lox{
 public:
@@ -19,7 +21,7 @@ public:
     Lox() = default;
 
     void run(std::string source){
-        Scanner scanner(source);
+        cplox::Scanner scanner(source);
         std::vector<Token> tokens = scanner.scan_tokens();
 
         for(auto token : scanner.tokens){
@@ -65,6 +67,7 @@ public:
         report(line, "", message);
     }
 };
+}
 
 
 
@@ -74,10 +77,10 @@ int main(int argc, char** argv){
         std::cout << "Usage: cpplox [script]" << std::endl;
         return -1;
     } else if (argc == 2) {
-        Lox lox_runner;
+        cpplox::Lox lox_runner;
         lox_runner.runFile(argv[0]);
     } else {
-        Lox lox_runner;
+        cpplox::Lox lox_runner;
         lox_runner.runPrompt();
     }
 
